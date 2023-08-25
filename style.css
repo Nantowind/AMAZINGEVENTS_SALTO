@@ -238,3 +238,12 @@
   text-align: center;
 }
 
+#cartita{
+  display: none !important;
+}
+
+@media screen and (min-width: 769px) {
+  .ultimate-test {
+    max-width: 24%;
+  }
+}

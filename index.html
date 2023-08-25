@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="style.css" />
     <title>Home</title>
   </head>
-  <body>
+  <body id="body">
     <header>
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
@@ -104,86 +104,37 @@
     </header>
     <main class="bg-dark">
       <section>
-        <div
-          id="carouselExampleFade"
-          class="carousel slide carousel-fade"
-          data-bs-ride="carousel"
-        >
+        <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img
-                src="./assets/optional_banner_1.jpg"
-                class="d-block w-100"
-                alt="Imagen de sushi"
-              />
-              <div
-                class="carousel-caption d-none d-md-block carousel-caption-container"
-              >
-                <h3 class="fw-bolder text-black text-uppercase">Home</h3>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <img
-                src="./assets/optional_banner_2.jpg"
-                class="d-block w-100"
-                alt="Imagen de cine"
-              />
-              <div class="carousel-caption d-none d-md-block">
-                <h3 class="fw-bolder text-black text-uppercase">Home</h3>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <img
-                src="./assets/optional_banner_3.jpg"
-                class="d-block w-100"
-                alt="Imagen de teatro"
-              />
-              <div class="carousel-caption d-none d-md-block">
-                <h3 class="fw-bolder text-black text-uppercase">Home</h3>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <img
-                src="./assets/optional_banner_4.jpg"
-                class="d-block w-100"
-                alt="Brillos y colores"
-              />
-              <div class="carousel-caption d-none d-md-block">
-                <h3 class="fw-bolder text-black text-uppercase">Home</h3>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <img
-                src="./assets/optional_banner_5.jpg"
-                class="d-block w-100"
-                alt="Imagen de recital"
-              />
-              <div class="carousel-caption d-none d-md-block">
-                <h3 class="fw-bolder text-black text-uppercase">Home</h3>
+              <img src="./assets/optional_banner_1.jpg" class="d-block w-100" alt="Imagen de sushi" />
+              <div class="carousel-caption d-none d-md-block carousel-caption-container">
+                <h3 id="title" class="fw-bolder text-black text-uppercase">Home</h3>
               </div>
             </div>
           </div>
-
-          <button
+      
+          <a
             class="carousel-control-prev"
-            type="button"
-            data-bs-target="#carouselExampleFade"
+            href="stats.html" 
+            role="button"
             data-bs-slide="prev"
           >
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Anterior</span>
-          </button>
-          <button
+          </a>
+          <a
             class="carousel-control-next"
-            type="button"
-            data-bs-target="#carouselExampleFade"
+            href="upcomingevents.html" 
+            role="button"
             data-bs-slide="next"
           >
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Siguiente</span>
-          </button>
+          </a>
         </div>
       </section>
+      
 
       <section class="container-fluid">
         <form
@@ -203,7 +154,7 @@
             <label
               class="form-check-label fs-4 w-25 text-white-50 fw-bolder"
               for="inlineCheckbox1"
-              >Category</label
+              >Room A</label
             >
           </div>
 
@@ -219,7 +170,7 @@
             <label
               class="form-check-label fs-4 w-25 text-white-50"
               for="inlineCheckbox2"
-              >Category</label
+              >Field</label
             >
           </div>
 
@@ -235,7 +186,7 @@
             <label
               class="form-check-label fs-4 w-25 text-white-50"
               for="inlineCheckbox3"
-              >Category</label
+              >Room C</label
             >
           </div>
 
@@ -251,7 +202,7 @@
             <label
               class="form-check-label fs-4 w-25 text-white-50"
               for="inlineCheckbox4"
-              >Category</label
+              >Soccer Field</label
             >
           </div>
 
@@ -267,7 +218,7 @@
             <label
               class="form-check-label fs-4 w-25 text-white-50"
               for="inlineCheckbox4"
-              >Category</label
+              >Room D1</label
             >
           </div>
 
@@ -286,8 +237,8 @@
       </section>
 
       <section class="container-fluid mt-3 bg-dark" id="galeria">
-        <div class="flex-column d-flex flex-md-row flex-md-wrap flex-lg-wrap">
-          <div class="col-md-3 mb-2 mx-5 d-flex flex-fill">
+        <div class="flex-column d-flex flex-md-row flex-md-wrap flex-lg-wrap" id="contenedor-galeria">
+          <div class="col-md-3 mb-2 mx-5 d-flex flex-fill ultimate-test" id="cartita" data-category="">
             <article class="card">
               <img
                 src="./assets/costume_party.jpg"
@@ -311,7 +262,7 @@
                     type="button"
                     class="btn btn-primary col-6"
                     data-bs-toggle="modal"
-                    data-bs-target="#eventModal1"
+                    data-bs-target=""
                   >
                     Details
                   </button>
@@ -320,172 +271,8 @@
             </article>
           </div>
 
-          <div class="col-md-3 mb-2 mx-5 d-flex flex-fill">
-            <article class="card">
-              <img
-                src="./assets/music_concert.jpg"
-                class="card-img-top"
-                alt="Image 1"
-              />
-              <div
-                class="card-body d-flex flex-column align-items-center justify-content-between"
-              >
-                <div class="d-flex flex-column align-items-center">
-                  <h2 class="card-title text-center">Metallica in concert</h2>
-                  <p>Music Concert</p>
-                </div>
 
-                <div
-                  class="d-flex justify-content-between align-items-center w-100"
-                >
-                  <h3 class="col-6">Price: 150</h3>
-
-                  <button
-                    type="button"
-                    class="btn btn-primary col-6"
-                    data-bs-toggle="modal"
-                    data-bs-target="#eventModal2"
-                  >
-                    Details
-                  </button>
-                </div>
-              </div>
-            </article>
-          </div>
-
-          <div class="col-md-3 mb-2 mx-5 d-flex flex-fill">
-            <article class="card">
-              <img
-                src="./assets/cinema.jpg"
-                class="card-img-top"
-                alt="Image 1"
-              />
-              <div
-                class="card-body d-flex flex-column align-items-center justify-content-between"
-              >
-                <div class="d-flex flex-column align-items-center">
-                  <h2 class="card-title text-center">Avengers</h2>
-                  <p>Let's go to the cinema</p>
-                </div>
-
-                <div
-                  class="d-flex justify-content-between align-items-center w-100"
-                >
-                  <h3 class="col-6">Price: 250</h3>
-
-                  <button
-                    type="button"
-                    class="btn btn-primary col-6"
-                    data-bs-toggle="modal"
-                    data-bs-target="#eventModal3"
-                  >
-                    Details
-                  </button>
-                </div>
-              </div>
-            </article>
-          </div>
-
-          <div class="col-md-3 mb-2 mx-5 d-flex flex-fill">
-            <article class="card">
-              <img
-                src="./assets/food_fair.jpg"
-                class="card-img-top"
-                alt="Image 1"
-              />
-              <div
-                class="card-body d-flex flex-column align-items-center justify-content-between"
-              >
-                <div class="d-flex flex-column align-items-center">
-                  <h2 class="card-title text-center">
-                    Festival of the collectivities
-                  </h2>
-                  <p>Food Fair</p>
-                </div>
-
-                <div
-                  class="d-flex justify-content-between align-items-center w-100"
-                >
-                  <h3 class="col-6">Price: 5</h3>
-
-                  <button
-                    type="button"
-                    class="btn btn-primary col-6"
-                    data-bs-toggle="modal"
-                    data-bs-target="#eventModal4"
-                  >
-                    Details
-                  </button>
-                </div>
-              </div>
-            </article>
-          </div>
-
-          <div class="col-md-3 mb-2 mx-5 d-flex flex-fill">
-            <article class="card">
-              <img
-                src="./assets/outing_to_the_museum.jpg"
-                class="card-img-top"
-                alt="Image 1"
-              />
-              <div
-                class="card-body d-flex flex-column align-items-center justify-content-between"
-              >
-                <div class="d-flex flex-column align-items-center">
-                  <h2 class="card-title text-center">Art Exhibition</h2>
-                  <p>Museum</p>
-                </div>
-
-                <div
-                  class="d-flex justify-content-between align-items-center w-100"
-                >
-                  <h3 class="col-6">Price: 15</h3>
-
-                  <button
-                    type="button"
-                    class="btn btn-primary col-6"
-                    data-bs-toggle="modal"
-                    data-bs-target="#eventModal5"
-                  >
-                    Details
-                  </button>
-                </div>
-              </div>
-            </article>
-          </div>
-
-          <div class="col-md-3 mb-2 mx-5 d-flex flex-fill">
-            <article class="card">
-              <img
-                src="./assets/books.jpg"
-                class="card-img-top"
-                alt="Image 1"
-              />
-              <div
-                class="card-body d-flex flex-column align-items-center justify-content-between"
-              >
-                <div class="d-flex flex-column align-items-center">
-                  <h2 class="card-title text-center">School Book Fair</h2>
-                  <p>Book Exchange</p>
-                </div>
-
-                <div
-                  class="d-flex justify-content-between align-items-center w-100"
-                >
-                  <h3 class="col-6">Price: 150</h3>
-
-                  <button
-                    type="button"
-                    class="btn btn-primary col-6"
-                    data-bs-toggle="modal"
-                    data-bs-target="#eventModal6"
-                  >
-                    Details
-                  </button>
-                </div>
-              </div>
-            </article>
-          </div>
+          
         </div>
       </section>
     </main>
@@ -493,125 +280,17 @@
 
     <!-- Modal -->
     <div
-      class="modal fade"
-      id="eventModal1"
-      tabindex="-1"
-      aria-labelledby="eventModal1Label"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title fs-2 fw-bold" id="eventModal1Label">
-              Halloween Night
-            </h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body fs-3">
-            Come in your scariest costume character to win amazing prizes.
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div
-      class="modal fade"
-      id="eventModal2"
-      tabindex="-1"
-      aria-labelledby="eventModal2"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title fs-2 fw-bold" id="eventModal2Label">
-              Metallica in concert
-            </h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body fs-3">
-            The only concert of the most emblematic band in the world.
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div
-      class="modal fade"
-      id="eventModal3"
-      tabindex="-1"
-      aria-labelledby="eventModal3"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title fs-2 fw-bold" id="eventModal3Label">
-              Avengers
-            </h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body fs-3">
-            Marvel's Avengers 3d premiere the start of an epic saga with your best superheroes
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div
-      class="modal fade"
-      id="eventModal4"
-      tabindex="-1"
-      aria-labelledby="eventModal4"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title fs-2 fw-bold" id="eventModal4Label">
-              Festival of the collectivities
-            </h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body fs-3">
-            Enjoy your favorite dishes from different countries in a unique event for the whole family
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div
     class="modal fade"
-    id="eventModal5"
+    id="eventModal"
     tabindex="-1"
-    aria-labelledby="eventModal5"
+    aria-labelledby="eventModal1Label"
     aria-hidden="true"
   >
     <div class="modal-dialog modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title fs-2 fw-bold" id="eventModal5Label">
-            Art Exhibition
+          <h5 class="modal-title fs-2 fw-bold" id="eventModal1Label">
+            Halloween Night
           </h5>
           <button
             type="button"
@@ -620,9 +299,9 @@
             aria-label="Close"
           ></button>
         </div>
-        <div class="modal-body fs-3">
-          Let's go to the art museum for an incredible tour to learn about the largest dinosaurs.
-        </div>
+        <p class="modal-body fs-3">
+          Come in your scariest costume character to win amazing prizes.
+        </p>
       </div>
     </div>
   </div>
@@ -674,16 +353,17 @@
               ><img
                 src="./assets/facebook.png"
                 alt="Facebook"
-                class="px-2 fs-2 W-25"
+                class="px-2 fs-2 W-25 social-icons"
                 id="testeo2"
             /></a>
             <a href="#"
               ><img
                 src="./assets/whatsapp.png"
                 alt="WhatsApp"
-                class="px-2 fs-2"
+                class="px-2 fs-2 social-icons"
                 id="testeo3"
             /></a>
+            
           </div>
 
           <div class="col-md-3 name fs-2">Cohort</div>
@@ -691,6 +371,7 @@
       </div>
     </footer>
 
+    <script src="js.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
