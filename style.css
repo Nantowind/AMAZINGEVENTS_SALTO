@@ -247,3 +247,14 @@
     max-width: 24%;
   }
 }
+
+.carousel-caption h3 {
+  margin: 0;
+  font-size: 10vh;
+  height: 100%;
+  color: #ffd700 !important;
+  text-shadow: 2px 2px 8px rgba(255, 217, 0, 0.87) !important;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 5px 10px;
+  border-radius: 5px;
+}
