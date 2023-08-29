@@ -190,65 +190,72 @@ let eventos = [
     price: 250,
     __v: 0,
   },
-]
+];
+let categoriasExistentesDeCheckbox = [];
+
+let arraycheck = [];
+
+let ultimaBusquedaIndex = -1;
 
 //Usamos el title para saber en que sitio estamos y segun eso filtrar los divs y cards que traermos
 let title = document.getElementById("title");
-//La fecha actual para saber si la fecha de el evento paso o esta por venir
+//La fecha que queremos para saber si la fecha de el evento paso o esta por venir
 let fechaActual = new Date("2023-01-01");
 
-//Traer Todos los divs y cards cuando termina de cargar la pagina
+//Traer Todos los divs cards,models y checkbox cuando termina de cargar la pagina
 document.addEventListener("DOMContentLoaded", function () {
   //Se fija que el title sea igual a home y agrega los divs sin filtrar
   if (title.innerHTML.trim() === "Home") {
     for (let i = 0; i < eventos.length; i++) {
       agregarDivCartaYModal(i);
     }
-    //se fija si el title es igual a upcoming events y trae los eventos que son mayor a la fecha actual
+    // Mostrar solo los eventos futuros en la página "Upcoming events" y los checks
   } else if (title.innerHTML.trim() === "Upcoming events") {
     for (let i = 0; i < eventos.length; i++) {
-      AgregarDivModalSiLaFechaActualEsMayor(i);
+      agregarCartaModalCheckboxSiFechaEsMayor(i);
     }
-    //se fija si el title es igual a past events y trae los eventos que son menor a la fecha actual
+    // Mostrar solo los eventos pasados en la página "Past events" y los checks
   } else if (title.innerHTML.trim() === "Past events") {
     for (let i = 0; i < eventos.length; i++) {
-      AgregarDivModalSiLaFechaActualEsMenor(i);
+      agregarCartaModalCheckboxSiFechaEsMenor(i);
     }
-    //nos avisa si no correspondo a ninguna de las paginas
-  } else {
+  } // Mostrar un mensaje de error si el título no coincide con ninguna página
+  else {
     console.log("cara troste no funciono" + title.innerHTML);
   }
+
+  agregarListenersACheckbox();
+
+  // Eliminar elementos innecesarios
   eliminarElDivCartita();
+  eliminarElDivCheckbox();
+  console.log(arraycheck);
+  realizarBusqueda();
 });
 
-//trae todos los checkbox
-const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-
-//itera en los checkbox y los escucha
-
-for (var i = 0; i < checkboxes.length; i++) {
-  checkboxes[i].addEventListener("change", cambiosEnElCheckbox);
-}
-
-//funciones divs y modal
-
-function AgregarDivModalSiLaFechaActualEsMenor(i) {
+//funciones cards modal y checkbox
+// Función que agrega una carta con modal y checkbox si la fecha del evento es menor que la fecha actual
+function agregarCartaModalCheckboxSiFechaEsMenor(i) {
   if (new Date(eventos[i].date) < fechaActual) {
     agregarDivCartaYModal(i);
   }
 }
 
-function AgregarDivModalSiLaFechaActualEsMayor(i) {
+// Función que agrega una carta con modal y checkbox si la fecha del evento es mayor que la fecha actual
+function agregarCartaModalCheckboxSiFechaEsMayor(i) {
   if (new Date(eventos[i].date) > fechaActual) {
     agregarDivCartaYModal(i);
   }
 }
 
+// Función que agrega una carta con modal y checkbox
 function agregarDivCartaYModal(i) {
   agregarDivCarta(i);
   agregarModal(i);
+  agregarCheckbox(i);
 }
 
+// Función que agrega una carta al contenedor de la galería
 function agregarDivCarta(i) {
   let contenedor = document.getElementById("contenedor-galeria");
   let cartita = document.getElementById("cartita");
@@ -256,10 +263,10 @@ function agregarDivCarta(i) {
   let nuevoDiv = document.createElement("div");
   nuevoDiv.className = cartita.className; // Copia las clases del elemento cartita
   nuevoDiv.innerHTML = cartita.innerHTML; // Copia el contenido del elemento cartita
-  nuevoDiv.setAttribute("data-category", eventos[i].place); //
+  nuevoDiv.setAttribute("data-category", eventos[i].category);
 
   let imgElement = nuevoDiv.querySelector("img");
-  imgElement.setAttribute("src",eventos[i].image);
+  imgElement.setAttribute("src", eventos[i].image);
 
   let h2Element = nuevoDiv.querySelector("h2");
   h2Element.innerHTML = eventos[i].name;
@@ -277,6 +284,28 @@ function agregarDivCarta(i) {
   contenedor.appendChild(nuevoDiv);
 }
 
+// Función que agrega un checkbox si la categoría del evento no existe en la lista
+function agregarCheckbox(i) {
+  if (!categoriasExistentesDeCheckbox.includes(eventos[i].category)) {
+    let contenedor = document.getElementById("form-filter");
+    let checkbox = document.getElementById("checkbox0");
+
+    let nuevoDiv = document.createElement("div");
+    nuevoDiv.className = checkbox.className;
+    nuevoDiv.innerHTML = checkbox.innerHTML;
+
+    let textoCategory = nuevoDiv.querySelector("label");
+    textoCategory.textContent = eventos[i].category;
+
+    let valueCategory = nuevoDiv.querySelector("input");
+    valueCategory.setAttribute("value", eventos[i].category);
+    categoriasExistentesDeCheckbox.push(eventos[i].category);
+
+    contenedor.appendChild(nuevoDiv);
+  }
+}
+
+// Función que agrega un modal al cuerpo del documento
 function agregarModal(i) {
   let body = document.getElementById("body");
   let modal = document.getElementById("eventModal");
@@ -298,70 +327,87 @@ function agregarModal(i) {
   body.appendChild(nuevoModal);
 }
 
+// Función que elimina el div del checkbox
+function eliminarElDivCheckbox() {
+  let checkbox = document.getElementById("checkbox0");
+  checkbox.remove();
+}
+
+// Función que elimina el div de la carta
 function eliminarElDivCartita() {
   let cartita = document.getElementById("cartita");
   cartita.remove();
 }
 
-//funciones form checkbox
-function quitarFiltroPuesto(label) {
-  let contenedor = document.getElementById("contenedor-galeria");
-  let divsHijos = contenedor.querySelectorAll(".ultimate-test");
+//funciones checkbox
+function agregarListenersACheckbox() {
+  let checkbox = document.querySelectorAll('input[type="checkbox"]');
 
-  for (let i = 0; i < divsHijos.length; i++) {
-    let div = divsHijos[i];
+  checkbox.forEach(function (checkbox) {
+    checkbox.addEventListener("change", function () {
+      let checkboxStatus;
+      if (this.checked) {
+        arraycheck.push(this.value.toLowerCase());
+        mostrarCartas();
+        ocultarCartas();
+      } else if (!this.check) {
+        arraycheck = arraycheck.filter(
+          (checkboxTild) => checkboxTild !== this.value.toLowerCase()
+        );
+        mostrarCartas();
+        ocultarCartas();
+      }
+    });
+  });
+}
+
+function mostrarCartas() {
+  let elementosDiv = document.querySelectorAll(".ultimate-test");
+
+  elementosDiv.forEach((div) => {
     let categoria = div.getAttribute("data-category");
-
-    if (categoria != label.textContent) {
-      div.style.cssText = "display: flex !important;";
+    if (arraycheck.includes(categoria.toLowerCase())) {
+      div.setAttribute("style", "display: block !important;");
     }
-  }
+  });
 }
-function filtrarTodosLosElementos(label) {
-  let contenedor = document.getElementById("contenedor-galeria");
-  let divsHijos = contenedor.querySelectorAll(".ultimate-test");
 
-  for (let i = 0; i < divsHijos.length; i++) {
-    let div = divsHijos[i];
+function ocultarCartas() {
+  let elementosDiv = document.querySelectorAll(".ultimate-test");
+
+  elementosDiv.forEach((div) => {
     let categoria = div.getAttribute("data-category");
-
-    if (categoria != label.textContent) {
-      div.style.cssText = "display: none !important;";
+    if (!arraycheck.includes(categoria.toLowerCase())) {
+      div.setAttribute("style", "display: none !important;");
     }
+  });
+
+  if (arraycheck.length == 0) {
+    elementosDiv.forEach((div) => {
+      div.setAttribute("style", "display: block !important;");
+    });
   }
 }
 
-// Función para manejar el cambio en el checkbox
-function cambiosEnElCheckbox(event) {
-  // Obtener el checkbox que toco
-  var checkbox = event.target;
+function realizarBusqueda() {
+  let inputBusqueda = document.getElementById("buscarInput");
+  let botonBuscar = document.getElementById("buscarButton");
 
-  //  obtiene el elemento siguiente que es un label
-  var label = checkbox.nextElementSibling;
+  botonBuscar.addEventListener("click", function () {
+    let valorBusqueda = inputBusqueda.value;
 
-  // Si el elemento se marco filtra todos los diferentes al marcado
-  if (checkbox.checked) {
-    filtrarTodosLosElementos(label);
-    deshabilitarCheckBox(checkbox);
-  } else {
-    // Si el elemento se desmarco cambia todos para que vuelvan a como antes
-    quitarFiltroPuesto(label);
-    habilitarCheckbox(checkbox);
-  }
-}
-
-function deshabilitarCheckBox(checkbox) {
-  for (var i = 0; i < checkboxes.length; i++) {
-    if (checkboxes[i] !== checkbox) {
-      checkboxes[i].disabled = true;
+    if (
+      valorBusqueda.trim() !== "" &&
+      !arraycheck.includes(valorBusqueda.trim().toLowerCase())
+    ) {
+      if (ultimaBusquedaIndex > -1) {
+        arraycheck.splice(ultimaBusquedaIndex, 1);
+      }
+      arraycheck.push(valorBusqueda.trim().toLowerCase());
+      inputBusqueda.value = "";
+      ultimaBusquedaIndex = arraycheck.indexOf(valorBusqueda);
     }
-  }
-}
-
-function habilitarCheckbox(checkbox) {
-  for (var i = 0; i < checkboxes.length; i++) {
-    if (checkboxes[i] !== checkbox) {
-      checkboxes[i].disabled = false;
-    }
-  }
+    mostrarCartas();
+    ocultarCartas();
+  });
 }

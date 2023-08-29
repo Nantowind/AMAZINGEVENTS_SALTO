@@ -1,0 +1,4 @@
+agregarCardsYChecksDeEventosPasados();
+agregarListenersACheckbox();
+realizarBusqueda();
+limpiarFiltros();

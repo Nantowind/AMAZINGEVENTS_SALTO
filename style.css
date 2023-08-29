@@ -145,11 +145,13 @@
   #form-filter > div.d-flex.col-3.py-3.align-self-start.align-self-md-center {
     display: flex !important;
     justify-content: space-around;
+    
   }
   #form-filter {
     flex-wrap: wrap !important;
     align-content: center !important;
     justify-content: space-around;
+    max-width: 100% !important;
   }
 
   .form-check-input {

@@ -1,0 +1,4 @@
+agregarTodasLasCardsYChecks();
+agregarListenersACheckbox();
+realizarBusqueda();
+limpiarFiltros();
