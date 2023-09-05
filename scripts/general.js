@@ -202,7 +202,6 @@ let categoriasSeleccionadas = [];
 // Esta variable almacena el índice de la última búsqueda realizada para la funcionalidad de búsqueda.
 let indiceUltimaBusqueda = -1;
 
-
 // Esta función crea y agrega elementos para una carta de evento en una galería.
 // Recibe un índice 'i' para acceder a los datos del evento en 'data.events[i]'.
 function crearCarta(i) {
@@ -273,9 +272,13 @@ function crearCarta(i) {
   const buttonElement = document.createElement("button");
   buttonElement.type = "button";
   buttonElement.classList.add("btn", "btn-primary", "col-6");
-  buttonElement.setAttribute("data-bs-toggle", "modal");
-  buttonElement.setAttribute("data-bs-target", "");
   buttonElement.textContent = "Details";
+  
+  const linkURL = "./details.html?id=" + data.events[i]._id;
+  
+  buttonElement.addEventListener("click", function() {
+    window.location.href = linkURL;
+  });
 
   // Agregar los elementos en la estructura correcta
   innerDiv1.appendChild(titleElement);
@@ -410,29 +413,31 @@ function agregarListenersACheckbox() {
   });
 }
 
-// Esta función realiza una búsqueda de eventos y agrega la categoría ingresada como filtro si no está presente en las categorías seleccionadas.
+// Esta función realiza una búsqueda de eventos y oculta las cartas que no coinciden con el término de búsqueda.
 function realizarBusqueda() {
   // Obtener el elemento de entrada de búsqueda y el botón de búsqueda
   let inputBusqueda = document.getElementById("buscarInput");
   let botonBuscar = document.getElementById("buscarButton");
+  let divs = document.querySelectorAll(".ultimate-test");
 
   // Agregar un event listener al botón de búsqueda
   botonBuscar.addEventListener("click", function () {
     // Obtener el valor de búsqueda
-    let valorBusqueda = inputBusqueda.value;
+    let valorBusqueda = inputBusqueda.value.toLowerCase();
 
     // Verificar si el valor de búsqueda no está vacío y no está en las categorías seleccionadas
-    if (
-      valorBusqueda.trim() !== "" &&
-      !categoriasSeleccionadas.includes(valorBusqueda.trim().toLowerCase())
-    ) {
-      // Si había una búsqueda anterior, eliminar su categoría del array 'categoriasSeleccionadas'
-      if (indiceUltimaBusqueda > -1) {
-        categoriasSeleccionadas.splice(indiceUltimaBusqueda, 1);
-      }
+    if (valorBusqueda.trim() !== "") {
+      // Iterar a través de los elementos div
+      divs.forEach((element) => {
+        // Obtener el elemento h2 dentro del div
+        let h2Element = element.querySelector("h2");
+        let h2Text = h2Element.textContent.toLowerCase();
 
-      // Agregar la categoría de búsqueda al array 'categoriasSeleccionadas'
-      categoriasSeleccionadas.push(valorBusqueda.trim().toLowerCase());
+        // Ocultar la carta si no coincide con el término de búsqueda
+        if (!h2Text.includes(valorBusqueda)) {
+          element.setAttribute("style", "display: none !important;");
+        }
+      });
 
       // Restablecer el valor del campo de búsqueda
       inputBusqueda.value = "";
@@ -440,19 +445,15 @@ function realizarBusqueda() {
       // Actualizar el índice de la última búsqueda
       indiceUltimaBusqueda = categoriasSeleccionadas.indexOf(valorBusqueda);
     }
-
-    // Mostrar y ocultar cartas según las categorías seleccionadas
-    mostrarCartas();
-    ocultarCartas();
   });
 }
 
 //Si el array categoriasSeleccionadas esta vacio muestra todas las cartas
-function mostrarTodasLasCartas(){
+function mostrarTodasLasCartas() {
   let elementosDiv = document.querySelectorAll(".ultimate-test");
   if (categoriasSeleccionadas.length == 0) {
     elementosDiv.forEach((div) => {
-      div.setAttribute("style", "display: block !important;");
+      div.setAttribute("style", "");
     });
   }
 }
@@ -464,7 +465,7 @@ function mostrarCartas() {
   elementosDiv.forEach((div) => {
     let categoria = div.getAttribute("data-category");
     if (categoriasSeleccionadas.includes(categoria.toLowerCase())) {
-      div.setAttribute("style", "display: block !important;");
+      div.setAttribute("style", "");
     }
   });
 }
@@ -481,10 +482,9 @@ function ocultarCartas() {
     }
   });
 
- //Si el array categoriasSeleccionadas esta vacio muestra todas las cartas
+  //Si el array categoriasSeleccionadas esta vacio muestra todas las cartas
   mostrarTodasLasCartas();
 }
-
 
 // Esta función limpia los filtros seleccionados al hacer clic en el botón "Limpiar Filtros".
 function limpiarFiltros() {
@@ -492,18 +492,18 @@ function limpiarFiltros() {
   let botonFiltros = document.getElementById("limpiarFiltrosButton");
 
   // Agregar un event listener al botón "Limpiar Filtros"
-  botonFiltros.addEventListener('click', function() {
+  botonFiltros.addEventListener("click", function () {
     // Obtener todos los checkboxes
     let checkboxes = document.querySelectorAll('input[type="checkbox"]');
-  
+
     // Desmarcar todos los checkboxes
-    checkboxes.forEach(function(checkbox) {
+    checkboxes.forEach(function (checkbox) {
       checkbox.checked = false;
     });
-    
+
     // Vaciar el array de categorías seleccionadas es decir vaciar filtros
     categoriasSeleccionadas = [];
-    
+
     // Mostrar todas las cartas solo si no hay filtros
     mostrarTodasLasCartas();
   });
