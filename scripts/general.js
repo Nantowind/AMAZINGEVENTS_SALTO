@@ -419,34 +419,45 @@ function realizarBusqueda() {
   let inputBusqueda = document.getElementById("buscarInput");
   let botonBuscar = document.getElementById("buscarButton");
   let divs = document.querySelectorAll(".ultimate-test");
+  let mensajeResultado = document.getElementById("buscarInput"); // Agrega un elemento para mostrar el mensaje de resultado
 
   // Agregar un event listener al botón de búsqueda
   botonBuscar.addEventListener("click", function () {
     // Obtener el valor de búsqueda
     let valorBusqueda = inputBusqueda.value.toLowerCase();
+    let resultadosEncontrados = false; // Variable para rastrear si se encontraron resultados
 
-    // Verificar si el valor de búsqueda no está vacío y no está en las categorías seleccionadas
-    if (valorBusqueda.trim() !== "") {
-      // Iterar a través de los elementos div
-      divs.forEach((element) => {
-        // Obtener el elemento h2 dentro del div
-        let h2Element = element.querySelector("h2");
-        let h2Text = h2Element.textContent.toLowerCase();
+    // Iterar a través de los elementos div
+    divs.forEach((element) => {
+      // Obtener el elemento h2 dentro del div
+      let h2Element = element.querySelector("h2");
+      let h2Text = h2Element.textContent.toLowerCase();
 
-        // Ocultar la carta si no coincide con el término de búsqueda
-        if (!h2Text.includes(valorBusqueda)) {
-          element.setAttribute("style", "display: none !important;");
-        }
-      });
+      // Ocultar la carta si no coincide con el término de búsqueda
+      if (!h2Text.includes(valorBusqueda)) {
+        element.setAttribute("style", "display: none !important;");
+        mensajeResultado.setAttribute("placeholder","buscar");
+      } else {
+        resultadosEncontrados = true; // Se encontró al menos una coincidencia
+      }
+    });
 
-      // Restablecer el valor del campo de búsqueda
-      inputBusqueda.value = "";
+    // Restablecer el valor del campo de búsqueda
+    inputBusqueda.value = "";
 
-      // Actualizar el índice de la última búsqueda
-      indiceUltimaBusqueda = categoriasSeleccionadas.indexOf(valorBusqueda);
+    // Actualizar el índice de la última búsqueda
+    indiceUltimaBusqueda = categoriasSeleccionadas.indexOf(valorBusqueda);
+
+    // Mostrar el mensaje de resultado
+    if (resultadosEncontrados) {
+      mensajeResultado.textContent = ""; // Borrar el mensaje si se encontraron resultados
+    } else {
+      mensajeResultado.setAttribute("placeholder","Sin resultados.")  ; // Mostrar el mensaje si no se encontraron resultados
+      mostrarTodasLasCartas();
     }
   });
 }
+
 
 //Si el array categoriasSeleccionadas esta vacio muestra todas las cartas
 function mostrarTodasLasCartas() {
