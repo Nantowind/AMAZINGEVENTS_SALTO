@@ -139,23 +139,18 @@
 
       <section>
         <div class="container table">
-          <h2 class="text-center">Estadísticas de Eventos</h2>
+          <h2 class="text-center">event statistics</h2>
           <table class="table table-bordered">
             <thead class="table-header">
               <tr>
                 <th colspan="3">Event Statistics</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="event-statistics">
               <tr>
-                <td>Event with highest % attendance</td>
-                <td>Event with lower % attendance</td>
-                <td>Event with larger capacity</td>
-              </tr>
-              <tr>
-                <td class="empty-cell"></td>
-                <td class="empty-cell"></td>
-                <td class="empty-cell"></td>
+                <td class="bg-primary-subtle">Event with highest % attendance</td>
+                <td class="bg-primary-subtle">Event with lower % attendance</td>
+                <td class="bg-primary-subtle">Event with larger capacity</td>
               </tr>
             </tbody>
             <thead class="table-header">
@@ -163,21 +158,11 @@
                 <th colspan="3">Upcoming Events Statistics by Category</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="event-upcoming-statistics">
               <tr>
-                <td>Categories</td>
-                <td>Revenues</td>
-                <td>Percentage of Attendance</td>
-              </tr>
-              <tr>
-                <td class="empty-cell"></td>
-                <td class="empty-cell"></td>
-                <td class="empty-cell"></td>
-              </tr>
-              <tr>
-                <td class="empty-cell"></td>
-                <td class="empty-cell"></td>
-                <td class="empty-cell"></td>
+                <td class="bg-primary-subtle">Categories</td>
+                <td class="bg-primary-subtle">Revenues</td>
+                <td class="bg-primary-subtle">Percentage of Attendance</td>
               </tr>
             </tbody>
             <thead class="table-header">
@@ -185,21 +170,17 @@
                 <th colspan="3">Post Events Statistics by Category</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="event-past-statistics">
               <tr>
-                <td class="empty-cell"></td>
-                <td class="empty-cell"></td>
-                <td class="empty-cell"></td>
-              </tr>
-              <tr>
-                <td class="empty-cell"></td>
-                <td class="empty-cell"></td>
-                <td class="empty-cell"></td>
+                <td class="bg-primary-subtle">Categories</td>
+                <td class="bg-primary-subtle">Revenues</td>
+                <td class="bg-primary-subtle">Percentage of Attendance</td>
               </tr>
             </tbody>
           </table>
         </div>
       </section>
+      
     </main>
 
     <footer class="footer pt-2">
@@ -237,7 +218,8 @@
         </div>
       </div>
     </footer>
-
+    <script src="./scripts/general.js"></script>
+    <script src="./scripts/stats.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"

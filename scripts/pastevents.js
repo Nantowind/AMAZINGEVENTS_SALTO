@@ -1,4 +1,4 @@
-agregarCardsYChecksDeEventosPasados();
-agregarListenersACheckbox();
-realizarBusqueda();
-limpiarFiltros();
+innitPage(addCardsAndCheckboxesForPastEvents,addCheckboxListeners);
+addCheckboxListeners();
+performSearch();
+clearFilters();

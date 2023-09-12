@@ -1,4 +1,3 @@
-agregarCardsYChecksDeProximosEventos();
-agregarListenersACheckbox();
-realizarBusqueda();
-limpiarFiltros();
+innitPage(addCardsAndCheckboxesForUpcomingEvents,addCheckboxListeners);
+performSearch();
+clearFilters();

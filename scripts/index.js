@@ -1,4 +1,3 @@
-agregarTodasLasCardsYChecks();
-agregarListenersACheckbox();
-realizarBusqueda();
-limpiarFiltros();
+innitPage(addAllCardsAndCheckboxes,addCheckboxListeners);
+performSearch();
+clearFilters();
